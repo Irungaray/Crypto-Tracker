@@ -8,6 +8,8 @@ import {
   FlatList
 } from 'react-native';
 
+import CoinMarketItem from './CoinMarketItem';
+
 import Http from '../../libs/http';
 import Colors from '../../res/colors';
 
@@ -100,13 +102,14 @@ class CoinDetailScreen extends Component {
           }
         />
 
-        <Text>Markets</Text>
+        <Text style={styles.marketsTitle}>Markets</Text>
 
         <FlatList
+          style={styles.list}
           horizontal={true}
           data={markets}
           renderItem={({ item }) =>
-            <Text>{item.name}</Text>
+            <CoinMarketItem item={ item } />
           }
         />
       </View>
@@ -137,6 +140,10 @@ const styles = StyleSheet.create({
   section: {
     maxHeight: 220
   },
+  list: {
+    maxHeight: 100,
+    paddingLeft: 16
+  },
   sectionHeader : {
     backgroundColor: "rgba(0, 0, 0, 0.2)",
     padding: 8,
@@ -151,6 +158,13 @@ const styles = StyleSheet.create({
   sectionText: {
     color: "#fff",
     fontSize: 14,
+    fontWeight: "bold"
+  },
+  marketsTitle: {
+    color: "#fff",
+    fontSize: 16,
+    marginBottom: 16,
+    marginLeft: 16,
     fontWeight: "bold"
   }
 })
