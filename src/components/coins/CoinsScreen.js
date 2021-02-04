@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator
+} from 'react-native';
+
+import CoinsItem from './CoinsItem';
 
 import Http from '../../libs/http';
 
 class CoinsScreen extends Component {
 
-  componentDidMount = async () => {
-    const response = await Http.instance.get("https://api.coinlore.net/api/tickers/");
+  state = {
+    coins: [],
+    loading: false
+  }
 
-    console.log("Api response:", response)
+  componentDidMount = async () => {
+    this.setState({ loading: true });
+
+    const response = await Http.instance.get("https://api.coinlore.net/api/tickers/");
+    console.log("Api response:", response);
+
+    this.setState({ coins: response.data, loading: false })
   }
 
   handlePress = () => {
@@ -18,11 +35,31 @@ class CoinsScreen extends Component {
   }
 
   render() {
+
+    const { coins, loading } = this.state;
+
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>
           Coins Screen
         </Text>
+
+        { loading ?
+          <ActivityIndicator
+            style={styles.loader}
+            color="#ffff"
+            size="large"
+          />
+          : null
+        }
+
+        {/* Flatlist offers much better performance */}
+        <FlatList
+          data={coins}
+          renderItem={({ item }) =>
+            <CoinsItem item={item} />
+          }
+        />
 
         <Pressable onPress={this.handlePress} style={styles.btn}>
           <Text style={styles.btnText}>
@@ -43,6 +80,10 @@ const styles = StyleSheet.create({
 
   titleText: {
     textAlign: "center"
+  },
+
+  loader: {
+    marginTop: 60
   },
 
   btn: {
