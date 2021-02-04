@@ -11,6 +11,7 @@ import {
 import CoinsItem from './CoinsItem';
 
 import Http from '../../libs/http';
+import Colors from '../../res/colors';
 
 class CoinsScreen extends Component {
 
@@ -72,31 +73,26 @@ class CoinsScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  cointainer: {
+  container: {
     flex: 1,
-    backgroundColor: "grey",
-    alignItems: "center"
+    backgroundColor: Colors.charade
   },
-
   titleText: {
     textAlign: "center"
   },
-
   loader: {
     marginTop: 60
   },
-
   btn: {
     padding: 8,
     backgroundColor: "black",
     borderRadius: 8,
     margin: 16
   },
-
   btnText: {
     color: "#fff",
     textAlign: "center"
   }
-})
+});
 
 export default CoinsScreen;
