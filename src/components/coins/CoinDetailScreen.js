@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, SectionList } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  SectionList,
+  FlatList
+} from 'react-native';
 
+import Http from '../../libs/http';
 import Colors from '../../res/colors';
 
 class CoinDetailScreen extends Component {
 
   state = {
-    coin: {}
+    coin: {},
+    markets: []
   }
 
   getSymbolIcon = (coinNameId) => {
@@ -34,17 +43,27 @@ class CoinDetailScreen extends Component {
     return data;
   }
 
+  getMarkets = async (coinId) => {
+    const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`;
+
+    const markets = await Http.instance.get(url);
+
+    this.setState({ markets })
+  }
+
   componentDidMount() {
     const { coin } = this.props.route.params;
 
     this.props.navigation.setOptions({ title: coin.symbol })
+
+    this.getMarkets(coin.id);
 
     this.setState({ coin });
   };
 
   render() {
 
-    const { coin } = this.state;
+    const { coin, markets } = this.state;
 
     return (
       <View style={styles.container}>
@@ -58,6 +77,8 @@ class CoinDetailScreen extends Component {
         </View>
 
         <SectionList
+          style={styles.section}
+
           sections={this.getSections(coin)}
 
           keyExtractor={( item ) => item}
@@ -76,6 +97,16 @@ class CoinDetailScreen extends Component {
                 {section.title}
               </Text>
             </View>
+          }
+        />
+
+        <Text>Markets</Text>
+
+        <FlatList
+          horizontal={true}
+          data={markets}
+          renderItem={({ item }) =>
+            <Text>{item.name}</Text>
           }
         />
       </View>
@@ -102,6 +133,9 @@ const styles = StyleSheet.create({
   iconImg: {
     width: 25,
     height: 25
+  },
+  section: {
+    maxHeight: 220
   },
   sectionHeader : {
     backgroundColor: "rgba(0, 0, 0, 0.2)",
