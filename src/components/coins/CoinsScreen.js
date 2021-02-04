@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
+import Http from '../../libs/http';
+
 class CoinsScreen extends Component {
+
+  componentDidMount = async () => {
+    const response = await Http.instance.get("https://api.coinlore.net/api/tickers/");
+
+    console.log("Api response:", response)
+  }
 
   handlePress = () => {
     console.log('Go to details', this.props);
