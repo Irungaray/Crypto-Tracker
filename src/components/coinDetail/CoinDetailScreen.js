@@ -6,6 +6,7 @@ import {
   StyleSheet,
   SectionList,
   FlatList,
+  ActivityIndicator
 } from 'react-native';
 
 import CoinMarketItem from './CoinMarketItem';
@@ -17,6 +18,7 @@ class CoinDetailScreen extends Component {
   state = {
     coin: {},
     markets: [],
+    loading: false
   };
 
   getSymbolIcon = (coinNameId) => {
@@ -45,11 +47,13 @@ class CoinDetailScreen extends Component {
   };
 
   getMarkets = async (coinId) => {
+    this.setState({ loading: true });
+
     const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`;
 
     const markets = await Http.instance.get(url);
 
-    this.setState({ markets });
+    this.setState({ markets, loading: false });
   };
 
   componentDidMount() {
@@ -63,7 +67,7 @@ class CoinDetailScreen extends Component {
   }
 
   render() {
-    const { coin, markets } = this.state;
+    const { coin, markets, loading } = this.state;
 
     return (
       <View style={styles.container}>
@@ -93,6 +97,10 @@ class CoinDetailScreen extends Component {
         />
 
         <Text style={styles.marketsTitle}>Markets</Text>
+
+        {loading ? (
+          <ActivityIndicator style={styles.loader} color="#ffff" size="large" />
+        ) : null}
 
         <FlatList
           style={styles.list}

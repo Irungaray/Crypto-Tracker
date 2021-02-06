@@ -40,8 +40,6 @@ class CoinsScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}>Coins Screen</Text>
-
         {loading ? (
           <ActivityIndicator style={styles.loader} color="#ffff" size="large" />
         ) : null}
