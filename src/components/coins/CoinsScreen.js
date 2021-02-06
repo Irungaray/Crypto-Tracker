@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import CoinsItem from './CoinsItem';
+import CoinsSearch from './CoinsSearch';
 
 import Http from '../../libs/http';
 import Colors from '../../res/colors';
@@ -15,19 +16,42 @@ import Colors from '../../res/colors';
 class CoinsScreen extends Component {
   state = {
     coins: [],
+    allCoins: [],
     loading: false,
   };
 
   componentDidMount = async () => {
+    this.getCoins();
+  };
+
+  getCoins = async () => {
     this.setState({ loading: true });
 
     const response = await Http.instance.get(
       'https://api.coinlore.net/api/tickers/',
     );
+
     console.log('Api response:', response);
 
-    this.setState({ coins: response.data, loading: false });
-  };
+    this.setState({
+      coins: response.data,
+      allCoins: response.data,
+      loading: false
+    });
+  }
+
+  handleSearch = (query) => {
+    const { allCoins } = this.state;
+
+    const coinsFiltered = allCoins.filter((coin) => {
+      return (
+        coin.name.toLowerCase().includes(query.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(query.toLowerCase())
+      )
+    });
+
+    this.setState({ coins: coinsFiltered });
+  }
 
   handlePress = (coin) => {
     console.log('Go to details', this.props);
@@ -40,6 +64,9 @@ class CoinsScreen extends Component {
 
     return (
       <View style={styles.container}>
+
+        <CoinsSearch onChange={this.handleSearch} />
+
         {loading ? (
           <ActivityIndicator style={styles.loader} color="#ffff" size="large" />
         ) : null}
