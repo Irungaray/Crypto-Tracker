@@ -1,17 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Platform, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Platform,
+  Pressable,
+} from 'react-native';
 
 import Colors from '../../res/colors';
 
 const CoinsItem = ({ item, onPress }) => {
-
   const getImgArrow = () => {
-    if(item.percent_change_1h > 0) {
-      return require("../../assets/up.png");
+    if (item.percent_change_1h > 0) {
+      return require('../../assets/up.png');
     } else {
-      return require("../../assets/down.png");
+      return require('../../assets/down.png');
     }
-  }
+  };
 
   return (
     <Pressable onPress={onPress} style={styles.container}>
@@ -22,52 +28,50 @@ const CoinsItem = ({ item, onPress }) => {
       </View>
 
       <View style={styles.row}>
-        <Text style={styles.percentText}>
-          % {item.percent_change_1h}
-        </Text>
+        <Text style={styles.percentText}>% {item.percent_change_1h}</Text>
 
-        <Image style={styles.imgIcon} source={ getImgArrow() } />
+        <Image style={styles.imgIcon} source={getImgArrow()} />
       </View>
     </Pressable>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: 16,
     marginLeft: Platform.OS == 'ios' ? 16 : 0,
     borderBottomColor: Colors.zircon,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   row: {
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   symbolText: {
-    color: "#fff",
+    color: '#fff',
     marginRight: 12,
-    fontWeight: "bold",
-    fontSize: 17
+    fontWeight: 'bold',
+    fontSize: 17,
   },
   nameText: {
-    color: "#fff",
+    color: '#fff',
     marginRight: 16,
-    fontSize: 12
+    fontSize: 12,
   },
   priceText: {
-    color: "#fff",
-    fontSize: 15
+    color: '#fff',
+    fontSize: 15,
   },
   percentText: {
-    color: "#fff",
+    color: '#fff',
     marginRight: 8,
-    fontSize: 15
+    fontSize: 15,
   },
   imgIcon: {
     width: 22,
-    height: 22
-  }
-})
+    height: 22,
+  },
+});
 
 export default CoinsItem;

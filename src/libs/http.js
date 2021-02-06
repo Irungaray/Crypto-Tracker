@@ -8,26 +8,26 @@ class Http {
 
       return json;
     } catch (err) {
-      console.log("HTTP GET Method error:", err);
+      console.log('HTTP GET Method error:', err);
       throw Error(err);
     }
-  }
+  };
 
   post = async (url, body) => {
     try {
       let req = fetch(url, {
-        method: "POST",
-        body
+        method: 'POST',
+        body,
       });
       let json = await req.json();
 
       return json;
     } catch (err) {
-      console.log("HTTP POST method error:", err)
+      console.log('HTTP POST method error:', err);
 
       throw Error(err);
     }
-  }
+  };
 }
 
 export default Http;

@@ -13,22 +13,15 @@ const CoinStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: Colors.blackPearl
+          backgroundColor: Colors.blackPearl,
         },
-        headerTintColor: Colors.white
-      }}
-    >
-      <Stack.Screen
-        name="BitCoins"
-        component={CoinsScreen}
-      />
+        headerTintColor: Colors.white,
+      }}>
+      <Stack.Screen name="BitCoins" component={CoinsScreen} />
 
-      <Stack.Screen
-        name="CoinDetail"
-        component={CoinDetailScreen}
-      />
+      <Stack.Screen name="CoinDetail" component={CoinDetailScreen} />
     </Stack.Navigator>
   );
-}
+};
 
 export default CoinStack;
