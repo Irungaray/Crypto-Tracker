@@ -44,10 +44,7 @@ class CoinsScreen extends Component {
     const { allCoins } = this.state;
 
     const coinsFiltered = allCoins.filter((coin) => {
-      return (
-        coin.name.toLowerCase().includes(query.toLowerCase()) ||
-        coin.symbol.toLowerCase().includes(query.toLowerCase())
-      )
+      return coin.name.toLowerCase().includes(query.toLowerCase()) || coin.symbol.toLowerCase().includes(query.toLowerCase())
     });
 
     this.setState({ coins: coinsFiltered });

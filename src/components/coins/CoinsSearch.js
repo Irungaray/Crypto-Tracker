@@ -6,7 +6,7 @@ import Colors from '../../res/colors';
 class CoinsSearch extends Component {
 
   state = {
-    query: " "
+    query: ""
   }
 
   handleText = (query) => {
