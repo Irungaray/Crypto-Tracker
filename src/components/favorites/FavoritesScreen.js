@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 import FavoritesEmptyState from './FavoritesEmptyState';
 
-import Colors from '../../res/colors';
+import styles from './styles/FavoritesScreen';
 
 class FavoritesScreen extends Component {
 
@@ -15,13 +15,5 @@ class FavoritesScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.charade
-  }
-});
-
 
 export default FavoritesScreen;

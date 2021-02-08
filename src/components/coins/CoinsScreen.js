@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
-  StyleSheet,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
@@ -11,7 +9,8 @@ import CoinsItem from './CoinsItem';
 import CoinsSearch from './CoinsSearch';
 
 import Http from '../../libs/http';
-import Colors from '../../res/colors';
+
+import styles from './styles/CoinsScreen';
 
 class CoinsScreen extends Component {
   state = {
@@ -79,28 +78,5 @@ class CoinsScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.charade,
-  },
-  titleText: {
-    textAlign: 'center',
-  },
-  loader: {
-    marginTop: 60,
-  },
-  btn: {
-    padding: 8,
-    backgroundColor: 'black',
-    borderRadius: 8,
-    margin: 16,
-  },
-  btnText: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-});
 
 export default CoinsScreen;
