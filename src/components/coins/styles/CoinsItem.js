@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 16,
-    marginLeft: Platform.OS == 'ios' ? 16 : 0,
+    marginLeft: Platform.OS === 'ios' ? 16 : 0,
     borderBottomColor: Colors.zircon,
     borderBottomWidth: 1,
   },

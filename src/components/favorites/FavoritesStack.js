@@ -15,14 +15,10 @@ const FavoritesStack = () => {
           backgroundColor: Colors.blackPearl,
         },
         headerTintColor: Colors.white,
-      }}
-    >
-      <Stack.Screen
-        name="Favorites"
-        component={FavoritesScreen}
-      />
+      }}>
+      <Stack.Screen name="Favorites" component={FavoritesScreen} />
     </Stack.Navigator>
   );
-}
+};
 
 export default FavoritesStack;

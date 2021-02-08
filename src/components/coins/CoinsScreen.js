@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
 
 import CoinsItem from './CoinsItem';
 import CoinsSearch from './CoinsSearch';
@@ -35,19 +31,22 @@ class CoinsScreen extends Component {
     this.setState({
       coins: response.data,
       allCoins: response.data,
-      loading: false
+      loading: false,
     });
-  }
+  };
 
   handleSearch = (query) => {
     const { allCoins } = this.state;
 
     const coinsFiltered = allCoins.filter((coin) => {
-      return coin.name.toLowerCase().includes(query.toLowerCase()) || coin.symbol.toLowerCase().includes(query.toLowerCase())
+      return (
+        coin.name.toLowerCase().includes(query.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(query.toLowerCase())
+      );
     });
 
     this.setState({ coins: coinsFiltered });
-  }
+  };
 
   handlePress = (coin) => {
     console.log('Go to details', this.props);
@@ -60,7 +59,6 @@ class CoinsScreen extends Component {
 
     return (
       <View style={styles.container}>
-
         <CoinsSearch onChange={this.handleSearch} />
 
         {loading ? (

@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.charade,
   },
   row: {
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   subHeader: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     padding: 16,
     flexDirection: 'row',
-    justifyContent: "space-between"
+    justifyContent: 'space-between',
   },
   titleText: {
     marginLeft: 8,
@@ -23,16 +23,16 @@ const styles = StyleSheet.create({
   },
   btnFavorite: {
     padding: 8,
-    borderRadius: 8
+    borderRadius: 8,
   },
   btnFavoriteText: {
-    color: Colors.white
+    color: Colors.white,
   },
   btnFavoriteAdd: {
-    backgroundColor: Colors.picton
+    backgroundColor: Colors.picton,
   },
   btnFavoriteRemove: {
-    backgroundColor: Colors.carmine
+    backgroundColor: Colors.carmine,
   },
   iconImg: {
     width: 25,

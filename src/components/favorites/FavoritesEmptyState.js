@@ -9,6 +9,6 @@ const FavoritesEmptyState = () => {
       <Text style={styles.text}>No Favorites</Text>
     </View>
   );
-}
+};
 
 export default FavoritesEmptyState;

@@ -3,11 +3,10 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
   SectionList,
   FlatList,
   ActivityIndicator,
-  Pressable
+  Pressable,
 } from 'react-native';
 
 import CoinMarketItem from './CoinMarketItem';
@@ -22,7 +21,7 @@ class CoinDetailScreen extends Component {
     coin: {},
     markets: [],
     isFavorite: false,
-    loading: false
+    loading: false,
   };
 
   getSymbolIcon = (coinNameId) => {
@@ -37,7 +36,7 @@ class CoinDetailScreen extends Component {
     } else {
       this.addFavorite();
     }
-  }
+  };
 
   addFavorite = async () => {
     const coin = JSON.stringify(this.state.coin);
@@ -45,13 +44,12 @@ class CoinDetailScreen extends Component {
 
     const stored = await Storage.instance.store(key, coin);
 
-    console.log("stored", stored);
+    console.log('stored', stored);
 
-
-    if(stored) {
+    if (stored) {
       this.setState({ isFavorite: true });
     }
-  }
+  };
 
   removeFavorite = async () => {
     const key = `favorite-${this.state.coin.id}`;
@@ -59,7 +57,7 @@ class CoinDetailScreen extends Component {
     await Storage.instance.remove(key);
 
     this.setState({ isFavorite: false });
-  }
+  };
 
   getFavorite = async () => {
     try {
@@ -67,16 +65,15 @@ class CoinDetailScreen extends Component {
 
       const favStr = await Storage.instance.get(key);
 
-      console.log("fav:", favStr);
+      console.log('fav:', favStr);
 
-      if(favStr != null) {
+      if (favStr != null) {
         this.setState({ isFavorite: true });
       }
     } catch (err) {
-      console.log("getFavorite err:", err)
+      console.log('getFavorite err:', err);
     }
-
-  }
+  };
 
   getSections = (coin) => {
     const data = [
@@ -138,13 +135,10 @@ class CoinDetailScreen extends Component {
             onPress={this.toggleFavorite}
             style={[
               styles.btnFavorite,
-              isFavorite ?
-                styles.btnFavoriteRemove :
-                styles.btnFavoriteAdd
-            ]}
-          >
+              isFavorite ? styles.btnFavoriteRemove : styles.btnFavoriteAdd,
+            ]}>
             <Text style={styles.btnFavoriteText}>
-              { isFavorite ?  "Remove Fav" : "Add Fav"}
+              {isFavorite ? 'Remove Fav' : 'Add Fav'}
             </Text>
           </Pressable>
         </View>
@@ -174,10 +168,9 @@ class CoinDetailScreen extends Component {
         <FlatList
           style={styles.list}
           horizontal={true}
-          keyExtractor={(item) => `${item.base}-${item.name}-${item.quote}`}          data={markets}
-          renderItem={({ item }) =>
-            <CoinMarketItem item={item} />
-          }
+          keyExtractor={(item) => `${item.base}-${item.name}-${item.quote}`}
+          data={markets}
+          renderItem={({ item }) => <CoinMarketItem item={item} />}
         />
       </View>
     );
