@@ -70,7 +70,7 @@ class CoinDetailScreen extends Component {
       console.log("fav:", favStr);
 
       if(favStr != null) {
-        this.setState({ isFavorite: true })
+        this.setState({ isFavorite: true });
       }
     } catch (err) {
       console.log("getFavorite err:", err)
