@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Storage {
   static instance = new Storage();
@@ -53,3 +53,5 @@ class Storage {
     }
   }
 }
+
+export default Storage;
