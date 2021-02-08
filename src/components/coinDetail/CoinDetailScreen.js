@@ -144,7 +144,7 @@ class CoinDetailScreen extends Component {
             ]}
           >
             <Text style={styles.btnFavoriteText}>
-              { isFavorite ?  "Remove" : "Add"}
+              { isFavorite ?  "Remove Fav" : "Add Fav"}
             </Text>
           </Pressable>
         </View>
