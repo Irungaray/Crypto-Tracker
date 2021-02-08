@@ -39,24 +39,43 @@ class CoinDetailScreen extends Component {
     }
   }
 
-  addFavorite = () => {
+  addFavorite = async () => {
     const coin = JSON.stringify(this.state.coin);
     const key = `favorite-${this.state.coin.id}`;
 
-    const stored = Storage.instance.store(key, coin);
+    const stored = await Storage.instance.store(key, coin);
+
+    console.log("stored", stored);
+
+
     if(stored) {
       this.setState({ isFavorite: true });
     }
   }
 
-  removeFavorite = () => {
-    // const coin = this.state.coin;
-    // const key = coin.id;
+  removeFavorite = async () => {
+    const key = `favorite-${this.state.coin.id}`;
 
-    // const stored = Storage.instance.store(key, coin);
-    // if(stored) {
-    //   this.setState({ isFavorite: false })
-    // }
+    await Storage.instance.remove(key);
+
+    this.setState({ isFavorite: false });
+  }
+
+  getFavorite = async () => {
+    try {
+      const key = `favorite-${this.state.coin.id}`;
+
+      const favStr = await Storage.instance.get(key);
+
+      console.log("fav:", favStr);
+
+      if(favStr != null) {
+        this.setState({ isFavorite: true })
+      }
+    } catch (err) {
+      console.log("getFavorite err:", err)
+    }
+
   }
 
   getSections = (coin) => {
@@ -95,7 +114,9 @@ class CoinDetailScreen extends Component {
 
     this.getMarkets(coin.id);
 
-    this.setState({ coin });
+    this.setState({ coin }, () => {
+      this.getFavorite();
+    });
   }
 
   render() {
